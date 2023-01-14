@@ -19,6 +19,22 @@ namespace FamilyBudget
                 Row_item tmp = new Row_item();
                 tmp.Dock = DockStyle.Top;
                 tlp_ItemRows.RowCount += 1;
+                if (tlp_ItemRows.RowCount % 2 == 1)
+                {
+                    Color cellColor;
+                    if(isExpenseTab)
+                    {
+                        cellColor = ColorTranslator.FromHtml("#a5d3e8");
+                    }
+                    else //income tab
+                    {
+                        cellColor = ColorTranslator.FromHtml("#a9eb9d");
+                    }
+                    tmp.mtb_DateCell.BackColor = cellColor;
+                    tmp.tb_DescriptionCell.BackColor = cellColor;
+                    tmp.mtb_AmountCell.BackColor = cellColor;
+                    tmp.lb_CategoryCell.BackColor = cellColor;
+                }
                 tlp_ItemRows.Controls.Add(tmp, 0, tlp_ItemRows.RowCount);
             }
             else
@@ -46,6 +62,8 @@ namespace FamilyBudget
                 Invoke(new MethodInvoker(() => { RemoveFinalRow(); }));
             }
         }
+
+        public bool isExpenseTab { get; set; }
 
         public Month_tab()
         {

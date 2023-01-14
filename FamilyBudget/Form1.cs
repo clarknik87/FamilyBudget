@@ -38,7 +38,9 @@ namespace FamilyBudget
                 Month_tab income_ctl = new Month_tab();
 
                 expense_ctl.Dock = DockStyle.Fill;
+                expense_ctl.isExpenseTab = true;
                 income_ctl.Dock = DockStyle.Fill;
+                income_ctl.isExpenseTab = false;
 
                 //Create expense and income tabs
                 System.Windows.Forms.TabPage expense_tab = new System.Windows.Forms.TabPage("Expenses");

@@ -79,8 +79,7 @@ namespace FamilyBudget
             // 
             // lb_CategoryCell
             // 
-            this.lb_CategoryCell.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lb_CategoryCell.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lb_CategoryCell.FormattingEnabled = true;
             this.lb_CategoryCell.Location = new System.Drawing.Point(536, 0);
             this.lb_CategoryCell.Margin = new System.Windows.Forms.Padding(0);
@@ -95,13 +94,14 @@ namespace FamilyBudget
             this.mtb_DateCell.Margin = new System.Windows.Forms.Padding(0);
             this.mtb_DateCell.Name = "mtb_DateCell";
             this.mtb_DateCell.Size = new System.Drawing.Size(102, 20);
-            this.mtb_DateCell.TabIndex = 4;
+            this.mtb_DateCell.TabIndex = 0;
             // 
             // Row_item
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tlp_CellColumns);
+            this.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.Name = "Row_item";
             this.Size = new System.Drawing.Size(640, 24);
             this.tlp_CellColumns.ResumeLayout(false);
@@ -113,9 +113,9 @@ namespace FamilyBudget
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tlp_CellColumns;
-        private System.Windows.Forms.TextBox tb_DescriptionCell;
-        private System.Windows.Forms.MaskedTextBox mtb_AmountCell;
-        private System.Windows.Forms.ListBox lb_CategoryCell;
-        private System.Windows.Forms.MaskedTextBox mtb_DateCell;
+        public System.Windows.Forms.MaskedTextBox mtb_DateCell;
+        public System.Windows.Forms.TextBox tb_DescriptionCell;
+        public System.Windows.Forms.MaskedTextBox mtb_AmountCell;
+        public System.Windows.Forms.ListBox lb_CategoryCell;
     }
 }
