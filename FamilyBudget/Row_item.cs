@@ -15,6 +15,7 @@ namespace FamilyBudget
         public Row_item()
         {
             InitializeComponent();
+            //lb_CategoryCell.Items.Add();
         }
     }
 }
