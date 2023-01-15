@@ -15,7 +15,25 @@ namespace FamilyBudget
         public Row_item()
         {
             InitializeComponent();
-            //lb_CategoryCell.Items.Add();
+        }
+
+        public List<String> Categories { get; set; }
+
+        private void lb_CategoryCell_Leave(object sender, EventArgs e)
+        {
+            //Verify that the text entered is one of the categories. If not set to other
+            ComboBox rwitem = sender as ComboBox;
+            if(!Categories.Contains(rwitem.Text))
+            {
+                if (Categories.Count > 0)
+                {
+                    rwitem.Text = Categories[0];
+                }
+                else
+                {
+                    rwitem.Text = "";
+                }
+            }
         }
     }
 }

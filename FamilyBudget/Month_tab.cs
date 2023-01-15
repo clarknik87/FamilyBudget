@@ -19,7 +19,25 @@ namespace FamilyBudget
                 Row_item tmp = new Row_item();
                 tmp.Dock = DockStyle.Top;
                 tlp_ItemRows.RowCount += 1;
-                if (tlp_ItemRows.RowCount % 2 == 1)
+
+                if(isExpenseTab)
+                {
+                    tmp.Categories = Global.ExpenseCategories;
+                    foreach (var cat in Global.ExpenseCategories)
+                    {
+                        tmp.lb_CategoryCell.Items.Add(cat);
+                    }
+                }
+                else
+                {
+                    tmp.Categories = Global.IncomeCategories;
+                    foreach (var cat in Global.IncomeCategories)
+                    {
+                        tmp.lb_CategoryCell.Items.Add(cat);
+                    }
+                }
+
+                if (tlp_ItemRows.RowCount % 2 == 0)
                 {
                     Color cellColor;
                     if(isExpenseTab)
@@ -34,6 +52,7 @@ namespace FamilyBudget
                     tmp.tb_DescriptionCell.BackColor = cellColor;
                     tmp.mtb_AmountCell.BackColor = cellColor;
                     tmp.lb_CategoryCell.BackColor = cellColor;
+
                 }
                 tlp_ItemRows.Controls.Add(tmp, 0, tlp_ItemRows.RowCount);
             }

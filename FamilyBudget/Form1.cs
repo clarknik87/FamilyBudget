@@ -16,22 +16,7 @@ namespace FamilyBudget
         {
             InitializeComponent();
 
-            List<string> months = new List<string>{ 
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December"
-            };
-
-            foreach(string m in months)
+            foreach(string m in Global.Months)
             {
                 //Create two month tab controls
                 Month_tab expense_ctl = new Month_tab();

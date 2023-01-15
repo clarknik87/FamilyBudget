@@ -32,8 +32,8 @@ namespace FamilyBudget
             this.tlp_CellColumns = new System.Windows.Forms.TableLayoutPanel();
             this.tb_DescriptionCell = new System.Windows.Forms.TextBox();
             this.mtb_AmountCell = new System.Windows.Forms.MaskedTextBox();
-            this.lb_CategoryCell = new System.Windows.Forms.ListBox();
             this.mtb_DateCell = new System.Windows.Forms.MaskedTextBox();
+            this.lb_CategoryCell = new System.Windows.Forms.ComboBox();
             this.tlp_CellColumns.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,8 +49,8 @@ namespace FamilyBudget
             this.tlp_CellColumns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
             this.tlp_CellColumns.Controls.Add(this.tb_DescriptionCell, 1, 0);
             this.tlp_CellColumns.Controls.Add(this.mtb_AmountCell, 2, 0);
-            this.tlp_CellColumns.Controls.Add(this.lb_CategoryCell, 3, 0);
             this.tlp_CellColumns.Controls.Add(this.mtb_DateCell, 0, 0);
+            this.tlp_CellColumns.Controls.Add(this.lb_CategoryCell, 3, 0);
             this.tlp_CellColumns.Location = new System.Drawing.Point(0, 0);
             this.tlp_CellColumns.Margin = new System.Windows.Forms.Padding(0);
             this.tlp_CellColumns.Name = "tlp_CellColumns";
@@ -77,16 +77,6 @@ namespace FamilyBudget
             this.mtb_AmountCell.Size = new System.Drawing.Size(102, 20);
             this.mtb_AmountCell.TabIndex = 2;
             // 
-            // lb_CategoryCell
-            // 
-            this.lb_CategoryCell.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lb_CategoryCell.FormattingEnabled = true;
-            this.lb_CategoryCell.Location = new System.Drawing.Point(536, 0);
-            this.lb_CategoryCell.Margin = new System.Windows.Forms.Padding(0);
-            this.lb_CategoryCell.Name = "lb_CategoryCell";
-            this.lb_CategoryCell.Size = new System.Drawing.Size(104, 24);
-            this.lb_CategoryCell.TabIndex = 3;
-            // 
             // mtb_DateCell
             // 
             this.mtb_DateCell.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -95,6 +85,18 @@ namespace FamilyBudget
             this.mtb_DateCell.Name = "mtb_DateCell";
             this.mtb_DateCell.Size = new System.Drawing.Size(102, 20);
             this.mtb_DateCell.TabIndex = 0;
+            // 
+            // lb_CategoryCell
+            // 
+            this.lb_CategoryCell.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lb_CategoryCell.FormattingEnabled = true;
+            this.lb_CategoryCell.Location = new System.Drawing.Point(536, 0);
+            this.lb_CategoryCell.Margin = new System.Windows.Forms.Padding(0);
+            this.lb_CategoryCell.MaxDropDownItems = 16;
+            this.lb_CategoryCell.Name = "lb_CategoryCell";
+            this.lb_CategoryCell.Size = new System.Drawing.Size(104, 21);
+            this.lb_CategoryCell.TabIndex = 3;
+            this.lb_CategoryCell.Leave += new System.EventHandler(this.lb_CategoryCell_Leave);
             // 
             // Row_item
             // 
@@ -116,6 +118,6 @@ namespace FamilyBudget
         public System.Windows.Forms.MaskedTextBox mtb_DateCell;
         public System.Windows.Forms.TextBox tb_DescriptionCell;
         public System.Windows.Forms.MaskedTextBox mtb_AmountCell;
-        public System.Windows.Forms.ListBox lb_CategoryCell;
+        public System.Windows.Forms.ComboBox lb_CategoryCell;
     }
 }
