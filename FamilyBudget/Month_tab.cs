@@ -48,9 +48,9 @@ namespace FamilyBudget
                     {
                         cellColor = ColorTranslator.FromHtml("#a9eb9d");
                     }
-                    tmp.mtb_DateCell.BackColor = cellColor;
+                    tmp.tb_DateCell.BackColor = cellColor;
                     tmp.tb_DescriptionCell.BackColor = cellColor;
-                    tmp.mtb_AmountCell.BackColor = cellColor;
+                    tmp.tb_AmountCell.BackColor = cellColor;
                     tmp.lb_CategoryCell.BackColor = cellColor;
 
                 }

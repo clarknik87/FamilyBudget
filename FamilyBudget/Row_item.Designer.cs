@@ -31,9 +31,9 @@ namespace FamilyBudget
         {
             this.tlp_CellColumns = new System.Windows.Forms.TableLayoutPanel();
             this.tb_DescriptionCell = new System.Windows.Forms.TextBox();
-            this.mtb_AmountCell = new System.Windows.Forms.MaskedTextBox();
-            this.mtb_DateCell = new System.Windows.Forms.MaskedTextBox();
             this.lb_CategoryCell = new System.Windows.Forms.ComboBox();
+            this.tb_DateCell = new System.Windows.Forms.TextBox();
+            this.tb_AmountCell = new System.Windows.Forms.TextBox();
             this.tlp_CellColumns.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,9 +48,9 @@ namespace FamilyBudget
             this.tlp_CellColumns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
             this.tlp_CellColumns.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
             this.tlp_CellColumns.Controls.Add(this.tb_DescriptionCell, 1, 0);
-            this.tlp_CellColumns.Controls.Add(this.mtb_AmountCell, 2, 0);
-            this.tlp_CellColumns.Controls.Add(this.mtb_DateCell, 0, 0);
             this.tlp_CellColumns.Controls.Add(this.lb_CategoryCell, 3, 0);
+            this.tlp_CellColumns.Controls.Add(this.tb_DateCell, 0, 0);
+            this.tlp_CellColumns.Controls.Add(this.tb_AmountCell, 2, 0);
             this.tlp_CellColumns.Location = new System.Drawing.Point(0, 0);
             this.tlp_CellColumns.Margin = new System.Windows.Forms.Padding(0);
             this.tlp_CellColumns.Name = "tlp_CellColumns";
@@ -68,24 +68,6 @@ namespace FamilyBudget
             this.tb_DescriptionCell.Size = new System.Drawing.Size(332, 20);
             this.tb_DescriptionCell.TabIndex = 1;
             // 
-            // mtb_AmountCell
-            // 
-            this.mtb_AmountCell.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mtb_AmountCell.Location = new System.Drawing.Point(434, 0);
-            this.mtb_AmountCell.Margin = new System.Windows.Forms.Padding(0);
-            this.mtb_AmountCell.Name = "mtb_AmountCell";
-            this.mtb_AmountCell.Size = new System.Drawing.Size(102, 20);
-            this.mtb_AmountCell.TabIndex = 2;
-            // 
-            // mtb_DateCell
-            // 
-            this.mtb_DateCell.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mtb_DateCell.Location = new System.Drawing.Point(0, 0);
-            this.mtb_DateCell.Margin = new System.Windows.Forms.Padding(0);
-            this.mtb_DateCell.Name = "mtb_DateCell";
-            this.mtb_DateCell.Size = new System.Drawing.Size(102, 20);
-            this.mtb_DateCell.TabIndex = 0;
-            // 
             // lb_CategoryCell
             // 
             this.lb_CategoryCell.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -97,6 +79,26 @@ namespace FamilyBudget
             this.lb_CategoryCell.Size = new System.Drawing.Size(104, 21);
             this.lb_CategoryCell.TabIndex = 3;
             this.lb_CategoryCell.Leave += new System.EventHandler(this.lb_CategoryCell_Leave);
+            // 
+            // tb_DateCell
+            // 
+            this.tb_DateCell.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DateCell.Location = new System.Drawing.Point(0, 0);
+            this.tb_DateCell.Margin = new System.Windows.Forms.Padding(0);
+            this.tb_DateCell.Name = "tb_DateCell";
+            this.tb_DateCell.Size = new System.Drawing.Size(102, 20);
+            this.tb_DateCell.TabIndex = 4;
+            this.tb_DateCell.Leave += new System.EventHandler(this.tb_DateCell_Leave);
+            // 
+            // tb_AmountCell
+            // 
+            this.tb_AmountCell.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_AmountCell.Location = new System.Drawing.Point(434, 0);
+            this.tb_AmountCell.Margin = new System.Windows.Forms.Padding(0);
+            this.tb_AmountCell.Name = "tb_AmountCell";
+            this.tb_AmountCell.Size = new System.Drawing.Size(102, 20);
+            this.tb_AmountCell.TabIndex = 5;
+            this.tb_AmountCell.Leave += new System.EventHandler(this.tb_AmountCell_Leave);
             // 
             // Row_item
             // 
@@ -115,9 +117,9 @@ namespace FamilyBudget
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tlp_CellColumns;
-        public System.Windows.Forms.MaskedTextBox mtb_DateCell;
         public System.Windows.Forms.TextBox tb_DescriptionCell;
-        public System.Windows.Forms.MaskedTextBox mtb_AmountCell;
         public System.Windows.Forms.ComboBox lb_CategoryCell;
+        public System.Windows.Forms.TextBox tb_AmountCell;
+        public System.Windows.Forms.TextBox tb_DateCell;
     }
 }
