@@ -103,22 +103,13 @@ namespace FamilyBudget
             TextBox datecell = sender as TextBox;
             String date_raw = datecell.Text;
             String date_formatted = "";
-            if (Regex.IsMatch(date_raw, @"./."))
-            {
-                String date_day = Regex.Split(date_raw, @"/")[0];
-                String date_month = Regex.Split(date_raw, @"/")[1];
+            String month_name = datecell.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Text;
+            int month_digits = Global.Months.IndexOf(month_name) + 1;
 
-                //Deal with the day portion
-                if(Regex.IsMatch(date_day, @"^\d$")) //one digit
-                {
-                    date_formatted += "0" + date_day;
-                    date_formatted += "/";
-                }
-                else if(Regex.IsMatch(date_day, @"^\d\d$"))
-                {
-                    date_formatted += date_day;
-                    date_formatted += "/";
-                }
+            if (Regex.IsMatch(date_raw, @"./.")) //Day and Month Entered
+            {
+                String date_day = Regex.Split(date_raw, @"/")[1];
+                String date_month = Regex.Split(date_raw, @"/")[0];
 
                 //Deal with the month portion
                 if(Regex.IsMatch(date_month, @"^\d$"))
@@ -127,7 +118,33 @@ namespace FamilyBudget
                 }
                 else if (Regex.IsMatch(date_month, @"^\d\d$"))
                 {
-                    date_formatted += date_month;
+                    if (Int32.Parse(date_month) > 0 && Int32.Parse(date_month) <= 12)
+                    {
+                        date_formatted += date_month;
+                    }
+                    else
+                    {
+                        date_formatted += month_digits;
+                    }
+                }
+
+                //Deal with the day portion
+                if (Regex.IsMatch(date_day, @"^\d$")) //one digit
+                {
+                    date_formatted += "/";
+                    date_formatted += "0" + date_day;
+                }
+                else if (Regex.IsMatch(date_day, @"^\d\d$"))
+                {
+                    date_formatted += "/";
+                    if (Int32.Parse(date_day) < 31)
+                    {
+                        date_formatted += date_day;
+                    }
+                    else
+                    {
+                        date_formatted += "31";
+                    }
                 }
 
                 if (Regex.IsMatch(date_formatted, @"\d\d/\d\d"))
@@ -136,16 +153,47 @@ namespace FamilyBudget
                     return;
                 }
             }
+            else if(Regex.IsMatch(date_raw, @"^\d{1,2}$")) //Only Day entered
+            {
+                // Deal with the month part
+                if (month_digits < 10)
+                {
+                    date_formatted += "0" + month_digits.ToString() + "/";
+                }
+                else
+                {
+                    date_formatted += month_digits.ToString() + "/";
+                }
+
+                // Deal with the day part
+                if (Regex.IsMatch(date_raw, @"^\d$"))
+                {
+                    date_formatted += "0" + date_raw;
+                }
+                else if(Regex.IsMatch(date_raw, @"^\d\d$"))
+                {
+                    if (Int32.Parse(date_raw) < 31)
+                    {
+                        date_formatted += date_raw;
+                    }
+                    else
+                    {
+                        date_formatted += "31";
+                    }
+                }
+
+                datecell.Text = date_formatted;
+                return;
+            }
+
             //The date was invalid
-            String month_name = datecell.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Text;
-            int month_digits = Global.Months.IndexOf(month_name)+1;
             if (month_digits < 10)
             {
-                date_formatted = "00/0" + month_digits.ToString(); 
+                date_formatted = "0" + month_digits.ToString() + "/00"; 
             }
             else
             {
-                date_formatted = "00/" + month_digits.ToString();
+                date_formatted = month_digits.ToString() + "/00";
             }
             datecell.Text = date_formatted;
         }

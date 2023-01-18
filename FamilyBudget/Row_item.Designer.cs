@@ -70,6 +70,8 @@ namespace FamilyBudget
             // 
             // lb_CategoryCell
             // 
+            this.lb_CategoryCell.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.lb_CategoryCell.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.lb_CategoryCell.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lb_CategoryCell.FormattingEnabled = true;
             this.lb_CategoryCell.Location = new System.Drawing.Point(536, 0);
@@ -87,7 +89,7 @@ namespace FamilyBudget
             this.tb_DateCell.Margin = new System.Windows.Forms.Padding(0);
             this.tb_DateCell.Name = "tb_DateCell";
             this.tb_DateCell.Size = new System.Drawing.Size(102, 20);
-            this.tb_DateCell.TabIndex = 4;
+            this.tb_DateCell.TabIndex = 0;
             this.tb_DateCell.Leave += new System.EventHandler(this.tb_DateCell_Leave);
             // 
             // tb_AmountCell
@@ -97,7 +99,7 @@ namespace FamilyBudget
             this.tb_AmountCell.Margin = new System.Windows.Forms.Padding(0);
             this.tb_AmountCell.Name = "tb_AmountCell";
             this.tb_AmountCell.Size = new System.Drawing.Size(102, 20);
-            this.tb_AmountCell.TabIndex = 5;
+            this.tb_AmountCell.TabIndex = 2;
             this.tb_AmountCell.Leave += new System.EventHandler(this.tb_AmountCell_Leave);
             // 
             // Row_item
