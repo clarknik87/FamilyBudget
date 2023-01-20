@@ -90,6 +90,8 @@ namespace FamilyBudget
             tlp_ItemRows.AutoScroll = false;
             tlp_ItemRows.HorizontalScroll.Enabled = false;
             tlp_ItemRows.AutoScroll = true;
+
+            //btn_DateSort.Image.Size = btn_DateSort.Size;
         }
 
         private void btn_removeRow_Click(object sender, EventArgs e)
@@ -100,6 +102,145 @@ namespace FamilyBudget
         private void btn_AddRow_Click(object sender, EventArgs e)
         {
             AddBlankRow();
+        }
+
+        //Sort functions
+        public enum Sort_Option
+        {
+            Date,
+            Description,
+            Amount,
+            Category
+        }
+
+        public Int32 CompareDate(Row_item a, Row_item b)
+        {
+            return String.Compare(a.GetDate(), b.GetDate());
+        }
+
+        public Int32 CompareDescription(Row_item a, Row_item b)
+        {
+            return String.Compare(a.GetDescription(), b.GetDescription());
+        }
+
+        public Int32 CompareAmount(Row_item a, Row_item b)
+        {
+            if(a.GetAmount() > b.GetAmount())
+            {
+                return 1;
+            }
+            else if(a.GetAmount() == b.GetAmount())
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public Int32 CompareCategory(Row_item a, Row_item b)
+        {
+            return String.Compare(a.GetCategory(), b.GetCategory());
+        }
+
+        public void Sort_Rows(Sort_Option opt)
+        {
+            if (!InvokeRequired)
+            {
+                SuspendLayout();
+                List<Row_item> rws = new List<Row_item>();
+                foreach (var e in tlp_ItemRows.Controls)
+                {
+                    rws.Add(e as Row_item);
+                }
+
+                tlp_ItemRows.Controls.Clear();
+
+                switch (opt)
+                {
+                    case Sort_Option.Date:
+                        rws.Sort(CompareDate);
+                        break;
+                    case Sort_Option.Description:
+                        rws.Sort(CompareDescription);
+                        break;
+                    case Sort_Option.Amount:
+                        rws.Sort(CompareAmount);
+                        break;
+                    case Sort_Option.Category:
+                        rws.Sort(CompareCategory);
+                        break;
+                }
+
+                int row_counter = 0;
+                foreach(var e in rws)
+                {
+                    Color cellColor;
+                    if (row_counter % 2 == 0)
+                    {
+                        if (isExpenseTab)
+                        {
+                            cellColor = ColorTranslator.FromHtml("#a5d3e8");
+                        }
+                        else //income tab
+                        {
+                            cellColor = ColorTranslator.FromHtml("#a9eb9d");
+                        }
+                    }
+                    else
+                    {
+                        cellColor = SystemColors.Control;
+                    }
+
+                    e.tb_DateCell.BackColor = cellColor;
+                    e.tb_DescriptionCell.BackColor = cellColor;
+                    e.tb_AmountCell.BackColor = cellColor;
+                    e.lb_CategoryCell.BackColor = cellColor;
+
+                    tlp_ItemRows.Controls.Add(e);
+                    tlp_ItemRows.SetRow(e, row_counter);
+                    ++row_counter;
+                }
+                ResumeLayout();
+            }
+            else
+            {
+                Invoke(new MethodInvoker(() => { Sort_Rows(opt); }));
+            }
+        }
+
+        //Sort Buttons
+        private void btn_DateSort_Click(object sender, EventArgs e)
+        {
+            if(tlp_ItemRows.Controls.Count > 0)
+            {
+                Sort_Rows(Sort_Option.Date);
+            }
+        }
+
+        private void btn_AmountSort_Click(object sender, EventArgs e)
+        {
+            if (tlp_ItemRows.Controls.Count > 0)
+            {
+                Sort_Rows(Sort_Option.Amount);
+            };
+        }
+
+        private void btn_DescriptionSort_Click(object sender, EventArgs e)
+        {
+            if (tlp_ItemRows.Controls.Count > 0)
+            {
+                Sort_Rows(Sort_Option.Description);
+            };
+        }
+
+        private void btn_CategorySort_Click(object sender, EventArgs e)
+        {
+            if (tlp_ItemRows.Controls.Count > 0)
+            {
+                Sort_Rows(Sort_Option.Category);
+            };
         }
     }
 }

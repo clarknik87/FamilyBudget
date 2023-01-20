@@ -30,11 +30,16 @@ namespace FamilyBudget
             return tb_DescriptionCell.Text;
         }
 
-        public int GetAmount()
+        public double GetAmount()
         {
             String amount = tb_AmountCell.Text;
             amount = amount.Substring(1);
-            return int.Parse(amount);
+            return double.Parse(amount);
+        }
+
+        public String GetCategory()
+        {
+            return lb_CategoryCell.Text;
         }
 
         private void lb_CategoryCell_Leave(object sender, EventArgs e)
