@@ -63,9 +63,29 @@ namespace FamilyBudget.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap sort_down {
+            get {
+                object obj = ResourceManager.GetObject("sort_down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap sort_none {
             get {
                 object obj = ResourceManager.GetObject("sort_none", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sort_up {
+            get {
+                object obj = ResourceManager.GetObject("sort_up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

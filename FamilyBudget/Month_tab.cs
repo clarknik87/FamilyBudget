@@ -90,8 +90,6 @@ namespace FamilyBudget
             tlp_ItemRows.AutoScroll = false;
             tlp_ItemRows.HorizontalScroll.Enabled = false;
             tlp_ItemRows.AutoScroll = true;
-
-            //btn_DateSort.Image.Size = btn_DateSort.Size;
         }
 
         private void btn_removeRow_Click(object sender, EventArgs e)
@@ -112,6 +110,19 @@ namespace FamilyBudget
             Amount,
             Category
         }
+
+        public enum Sort_State
+        {
+            None,
+            Up,
+            Down
+        }
+
+        public Sort_State btnDateState { get; set; } = Sort_State.None;
+        public Sort_State btnDescriptionState { get; set; } = Sort_State.None;
+        public Sort_State btnAmountState { get; set; } = Sort_State.None;
+        public Sort_State btnCategoryState { get; set; } = Sort_State.None;
+
 
         public Int32 CompareDate(Row_item a, Row_item b)
         {
@@ -144,7 +155,7 @@ namespace FamilyBudget
             return String.Compare(a.GetCategory(), b.GetCategory());
         }
 
-        public void Sort_Rows(Sort_Option opt)
+        public void Sort_Rows(Sort_Option opt, bool reverse)
         {
             if (!InvokeRequired)
             {
@@ -173,6 +184,11 @@ namespace FamilyBudget
                         break;
                 }
 
+                if(reverse)
+                {
+                    rws.Reverse();
+                }
+
                 int row_counter = 0;
                 foreach(var e in rws)
                 {
@@ -198,24 +214,49 @@ namespace FamilyBudget
                     e.tb_AmountCell.BackColor = cellColor;
                     e.lb_CategoryCell.BackColor = cellColor;
 
+                    e.lb_CategoryCell.SelectionLength = 0;
+
                     tlp_ItemRows.Controls.Add(e);
                     tlp_ItemRows.SetRow(e, row_counter);
                     ++row_counter;
                 }
                 ResumeLayout();
+
+                //Keep the first category in the list from being selected. idk why this is needed...
+                (tlp_ItemRows.Controls[0] as Row_item).lb_CategoryCell.SelectionLength = 0;
             }
             else
             {
-                Invoke(new MethodInvoker(() => { Sort_Rows(opt); }));
+                Invoke(new MethodInvoker(() => { Sort_Rows(opt, reverse); }));
             }
         }
 
         //Sort Buttons
         private void btn_DateSort_Click(object sender, EventArgs e)
         {
-            if(tlp_ItemRows.Controls.Count > 0)
+            if (tlp_ItemRows.Controls.Count > 0)
             {
-                Sort_Rows(Sort_Option.Date);
+                //Reset other buttons
+                btn_DescriptionSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnDescriptionState = Sort_State.None;
+                btn_AmountSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnAmountState = Sort_State.None;
+                btn_CategorySort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnCategoryState = Sort_State.None;
+
+                //Step to next button state and sort
+                if (btnDateState == Sort_State.None || btnDateState == Sort_State.Up)
+                {
+                    btn_DateSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_down;
+                    btnDateState = Sort_State.Down;
+                    Sort_Rows(Sort_Option.Date, false);
+                }
+                else
+                {
+                    btn_DateSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_up;
+                    btnDateState = Sort_State.Up;
+                    Sort_Rows(Sort_Option.Date, true);
+                }
             }
         }
 
@@ -223,24 +264,88 @@ namespace FamilyBudget
         {
             if (tlp_ItemRows.Controls.Count > 0)
             {
-                Sort_Rows(Sort_Option.Amount);
-            };
+                //Reset other buttons
+                btn_DateSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnDateState = Sort_State.None;
+                btn_DescriptionSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnDescriptionState = Sort_State.None;
+                btn_CategorySort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnCategoryState = Sort_State.None;
+
+                //Step to next button state and sort
+                if (btnAmountState == Sort_State.None || btnAmountState == Sort_State.Up)
+                {
+                    btn_AmountSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_down;
+                    btnAmountState = Sort_State.Down;
+                    Sort_Rows(Sort_Option.Amount, false);
+                }
+                else
+                {
+                    btn_AmountSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_up;
+                    btnAmountState = Sort_State.Up;
+                    Sort_Rows(Sort_Option.Amount, true);
+                }
+            }
         }
 
         private void btn_DescriptionSort_Click(object sender, EventArgs e)
         {
             if (tlp_ItemRows.Controls.Count > 0)
             {
-                Sort_Rows(Sort_Option.Description);
-            };
+                //Reset other buttons
+                btn_DateSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnDateState = Sort_State.None;
+                //btn_DescriptionSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                //btnDescriptionState = Sort_State.None;
+                btn_AmountSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnAmountState = Sort_State.None;
+                btn_CategorySort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnCategoryState = Sort_State.None;
+
+                //Step to next button state and sort
+                if (btnDescriptionState == Sort_State.None || btnDescriptionState == Sort_State.Up)
+                {
+                    btn_DescriptionSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_down;
+                    btnDescriptionState = Sort_State.Down;
+                    Sort_Rows(Sort_Option.Description, false);
+                }
+                else
+                {
+                    btn_DescriptionSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_up;
+                    btnDescriptionState = Sort_State.Up;
+                    Sort_Rows(Sort_Option.Description, true);
+                }
+            }
         }
 
         private void btn_CategorySort_Click(object sender, EventArgs e)
         {
             if (tlp_ItemRows.Controls.Count > 0)
             {
-                Sort_Rows(Sort_Option.Category);
-            };
+                //Reset other buttons
+                btn_DateSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnDateState = Sort_State.None;
+                btn_DescriptionSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnDescriptionState = Sort_State.None;
+                btn_AmountSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                btnAmountState = Sort_State.None;
+                //btn_CategorySort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+                //btnCategoryState = Sort_State.None;
+
+                //Step to next button state and sort
+                if (btnCategoryState == Sort_State.None || btnCategoryState == Sort_State.Up)
+                {
+                    btn_CategorySort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_down;
+                    btnCategoryState = Sort_State.Down;
+                    Sort_Rows(Sort_Option.Category, false);
+                }
+                else
+                {
+                    btn_CategorySort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_up;
+                    btnCategoryState = Sort_State.Up;
+                    Sort_Rows(Sort_Option.Category, true);
+                }
+            }
         }
     }
 }

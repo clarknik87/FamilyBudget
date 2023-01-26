@@ -102,5 +102,11 @@
   <ItemGroup>
     <None Include="sort_none.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="sort_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sort_up.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

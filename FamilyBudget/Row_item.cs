@@ -33,8 +33,12 @@ namespace FamilyBudget
         public double GetAmount()
         {
             String amount = tb_AmountCell.Text;
-            amount = amount.Substring(1);
-            return double.Parse(amount);
+            if (amount != "")
+            {
+                amount = amount.Substring(1);
+                return double.Parse(amount);
+            }
+            return 0.0;
         }
 
         public String GetCategory()

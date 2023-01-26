@@ -31,18 +31,18 @@ namespace FamilyBudget
         {
             this.tlp_TopLevelRows = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_labelrow = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_CategorySort = new System.Windows.Forms.Button();
+            this.btn_AmountSort = new System.Windows.Forms.Button();
+            this.btn_DescriptionSort = new System.Windows.Forms.Button();
             this.lbl_Category = new System.Windows.Forms.Label();
             this.lbl_Amount = new System.Windows.Forms.Label();
             this.lbl_Description = new System.Windows.Forms.Label();
             this.lbl_Date = new System.Windows.Forms.Label();
+            this.btn_DateSort = new System.Windows.Forms.Button();
             this.tlp_ButtonRow = new System.Windows.Forms.TableLayoutPanel();
             this.btn_removeRow = new System.Windows.Forms.Button();
             this.btn_AddRow = new System.Windows.Forms.Button();
             this.tlp_ItemRows = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_DateSort = new System.Windows.Forms.Button();
-            this.btn_DescriptionSort = new System.Windows.Forms.Button();
-            this.btn_AmountSort = new System.Windows.Forms.Button();
-            this.btn_CategorySort = new System.Windows.Forms.Button();
             this.tlp_TopLevelRows.SuspendLayout();
             this.tlp_labelrow.SuspendLayout();
             this.tlp_ButtonRow.SuspendLayout();
@@ -78,7 +78,7 @@ namespace FamilyBudget
             this.tlp_labelrow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
             this.tlp_labelrow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_labelrow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
-            this.tlp_labelrow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tlp_labelrow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tlp_labelrow.Controls.Add(this.btn_CategorySort, 7, 0);
             this.tlp_labelrow.Controls.Add(this.btn_AmountSort, 5, 0);
             this.tlp_labelrow.Controls.Add(this.btn_DescriptionSort, 3, 0);
@@ -95,14 +95,63 @@ namespace FamilyBudget
             this.tlp_labelrow.Size = new System.Drawing.Size(630, 26);
             this.tlp_labelrow.TabIndex = 0;
             // 
+            // btn_CategorySort
+            // 
+            this.btn_CategorySort.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_CategorySort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+            this.btn_CategorySort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_CategorySort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_CategorySort.Location = new System.Drawing.Point(601, 1);
+            this.btn_CategorySort.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_CategorySort.Name = "btn_CategorySort";
+            this.btn_CategorySort.Size = new System.Drawing.Size(28, 24);
+            this.btn_CategorySort.TabIndex = 7;
+            this.btn_CategorySort.TabStop = false;
+            this.btn_CategorySort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btn_CategorySort.UseVisualStyleBackColor = false;
+            this.btn_CategorySort.Click += new System.EventHandler(this.btn_CategorySort_Click);
+            // 
+            // btn_AmountSort
+            // 
+            this.btn_AmountSort.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_AmountSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+            this.btn_AmountSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_AmountSort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_AmountSort.Location = new System.Drawing.Point(494, 1);
+            this.btn_AmountSort.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_AmountSort.Name = "btn_AmountSort";
+            this.btn_AmountSort.Size = new System.Drawing.Size(20, 24);
+            this.btn_AmountSort.TabIndex = 6;
+            this.btn_AmountSort.TabStop = false;
+            this.btn_AmountSort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btn_AmountSort.UseVisualStyleBackColor = false;
+            this.btn_AmountSort.Click += new System.EventHandler(this.btn_AmountSort_Click);
+            // 
+            // btn_DescriptionSort
+            // 
+            this.btn_DescriptionSort.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_DescriptionSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+            this.btn_DescriptionSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_DescriptionSort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_DescriptionSort.Location = new System.Drawing.Point(387, 1);
+            this.btn_DescriptionSort.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_DescriptionSort.Name = "btn_DescriptionSort";
+            this.btn_DescriptionSort.Size = new System.Drawing.Size(20, 24);
+            this.btn_DescriptionSort.TabIndex = 5;
+            this.btn_DescriptionSort.TabStop = false;
+            this.btn_DescriptionSort.Text = "-";
+            this.btn_DescriptionSort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btn_DescriptionSort.UseVisualStyleBackColor = false;
+            this.btn_DescriptionSort.Click += new System.EventHandler(this.btn_DescriptionSort_Click);
+            // 
             // lbl_Category
             // 
             this.lbl_Category.AutoSize = true;
             this.lbl_Category.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Category.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Category.Location = new System.Drawing.Point(521, 1);
+            this.lbl_Category.Location = new System.Drawing.Point(518, 1);
             this.lbl_Category.Name = "lbl_Category";
-            this.lbl_Category.Size = new System.Drawing.Size(80, 24);
+            this.lbl_Category.Size = new System.Drawing.Size(79, 24);
             this.lbl_Category.TabIndex = 3;
             this.lbl_Category.Text = "Category";
             this.lbl_Category.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -112,9 +161,9 @@ namespace FamilyBudget
             this.lbl_Amount.AutoSize = true;
             this.lbl_Amount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Amount.Location = new System.Drawing.Point(413, 1);
+            this.lbl_Amount.Location = new System.Drawing.Point(411, 1);
             this.lbl_Amount.Name = "lbl_Amount";
-            this.lbl_Amount.Size = new System.Drawing.Size(80, 24);
+            this.lbl_Amount.Size = new System.Drawing.Size(79, 24);
             this.lbl_Amount.TabIndex = 2;
             this.lbl_Amount.Text = "Amount";
             this.lbl_Amount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -124,9 +173,9 @@ namespace FamilyBudget
             this.lbl_Description.AutoSize = true;
             this.lbl_Description.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Description.Location = new System.Drawing.Point(112, 1);
+            this.lbl_Description.Location = new System.Drawing.Point(111, 1);
             this.lbl_Description.Name = "lbl_Description";
-            this.lbl_Description.Size = new System.Drawing.Size(273, 24);
+            this.lbl_Description.Size = new System.Drawing.Size(272, 24);
             this.lbl_Description.TabIndex = 1;
             this.lbl_Description.Text = "Description";
             this.lbl_Description.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -138,10 +187,26 @@ namespace FamilyBudget
             this.lbl_Date.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Date.Location = new System.Drawing.Point(4, 1);
             this.lbl_Date.Name = "lbl_Date";
-            this.lbl_Date.Size = new System.Drawing.Size(80, 24);
+            this.lbl_Date.Size = new System.Drawing.Size(79, 24);
             this.lbl_Date.TabIndex = 0;
             this.lbl_Date.Text = "Date";
             this.lbl_Date.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btn_DateSort
+            // 
+            this.btn_DateSort.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_DateSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
+            this.btn_DateSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_DateSort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_DateSort.Location = new System.Drawing.Point(87, 1);
+            this.btn_DateSort.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_DateSort.Name = "btn_DateSort";
+            this.btn_DateSort.Size = new System.Drawing.Size(20, 24);
+            this.btn_DateSort.TabIndex = 4;
+            this.btn_DateSort.TabStop = false;
+            this.btn_DateSort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btn_DateSort.UseVisualStyleBackColor = false;
+            this.btn_DateSort.Click += new System.EventHandler(this.btn_DateSort_Click);
             // 
             // tlp_ButtonRow
             // 
@@ -199,71 +264,6 @@ namespace FamilyBudget
             this.tlp_ItemRows.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp_ItemRows.Size = new System.Drawing.Size(636, 243);
             this.tlp_ItemRows.TabIndex = 2;
-            // 
-            // btn_DateSort
-            // 
-            this.btn_DateSort.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_DateSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
-            this.btn_DateSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_DateSort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_DateSort.Location = new System.Drawing.Point(88, 1);
-            this.btn_DateSort.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_DateSort.Name = "btn_DateSort";
-            this.btn_DateSort.Size = new System.Drawing.Size(20, 24);
-            this.btn_DateSort.TabIndex = 4;
-            this.btn_DateSort.TabStop = false;
-            this.btn_DateSort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btn_DateSort.UseVisualStyleBackColor = false;
-            this.btn_DateSort.Click += new System.EventHandler(this.btn_DateSort_Click);
-            // 
-            // btn_DescriptionSort
-            // 
-            this.btn_DescriptionSort.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_DescriptionSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
-            this.btn_DescriptionSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_DescriptionSort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_DescriptionSort.Location = new System.Drawing.Point(389, 1);
-            this.btn_DescriptionSort.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_DescriptionSort.Name = "btn_DescriptionSort";
-            this.btn_DescriptionSort.Size = new System.Drawing.Size(20, 24);
-            this.btn_DescriptionSort.TabIndex = 5;
-            this.btn_DescriptionSort.TabStop = false;
-            this.btn_DescriptionSort.Text = "-";
-            this.btn_DescriptionSort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btn_DescriptionSort.UseVisualStyleBackColor = false;
-            this.btn_DescriptionSort.Click += new System.EventHandler(this.btn_DescriptionSort_Click);
-            // 
-            // btn_AmountSort
-            // 
-            this.btn_AmountSort.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_AmountSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
-            this.btn_AmountSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_AmountSort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_AmountSort.Location = new System.Drawing.Point(497, 1);
-            this.btn_AmountSort.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_AmountSort.Name = "btn_AmountSort";
-            this.btn_AmountSort.Size = new System.Drawing.Size(20, 24);
-            this.btn_AmountSort.TabIndex = 6;
-            this.btn_AmountSort.TabStop = false;
-            this.btn_AmountSort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btn_AmountSort.UseVisualStyleBackColor = false;
-            this.btn_AmountSort.Click += new System.EventHandler(this.btn_AmountSort_Click);
-            // 
-            // btn_CategorySort
-            // 
-            this.btn_CategorySort.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_CategorySort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
-            this.btn_CategorySort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_CategorySort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_CategorySort.Location = new System.Drawing.Point(605, 1);
-            this.btn_CategorySort.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_CategorySort.Name = "btn_CategorySort";
-            this.btn_CategorySort.Size = new System.Drawing.Size(24, 24);
-            this.btn_CategorySort.TabIndex = 7;
-            this.btn_CategorySort.TabStop = false;
-            this.btn_CategorySort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btn_CategorySort.UseVisualStyleBackColor = false;
-            this.btn_CategorySort.Click += new System.EventHandler(this.btn_CategorySort_Click);
             // 
             // Month_tab
             // 
