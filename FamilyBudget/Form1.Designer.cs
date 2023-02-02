@@ -62,6 +62,7 @@
             this.Controls.Add(this.tc_TabController);
             this.Name = "MainForm";
             this.Text = "Family Budget";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.tc_TabController.ResumeLayout(false);
             this.ResumeLayout(false);
 

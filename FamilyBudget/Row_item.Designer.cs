@@ -67,6 +67,7 @@ namespace FamilyBudget
             this.tb_DescriptionCell.Name = "tb_DescriptionCell";
             this.tb_DescriptionCell.Size = new System.Drawing.Size(332, 20);
             this.tb_DescriptionCell.TabIndex = 1;
+            this.tb_DescriptionCell.Leave += new System.EventHandler(this.tb_DescriptionCell_Leave);
             // 
             // lb_CategoryCell
             // 

@@ -60,6 +60,8 @@ namespace FamilyBudget
 
     static class Program
     {
+        public static MainForm mainWindow = null;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -68,7 +70,8 @@ namespace FamilyBudget
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            mainWindow = new MainForm();
+            Application.Run(mainWindow);
         }
     }
 }

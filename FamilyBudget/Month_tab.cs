@@ -12,7 +12,7 @@ namespace FamilyBudget
 {
     public partial class Month_tab : UserControl
     {
-        public void AddBlankRow()
+        public void AddRow(String p_date, String p_descr, String p_amt, String p_cat)
         {
             if (!InvokeRequired)
             {
@@ -54,11 +54,18 @@ namespace FamilyBudget
                     tmp.lb_CategoryCell.BackColor = cellColor;
 
                 }
+
+                if (p_date != String.Empty)     { tmp.SetDate(p_date, month); }
+                if (p_descr != String.Empty)    { tmp.SetDescription(p_descr); }
+                if (p_amt != String.Empty)      { tmp.SetAmount(p_amt); }
+                if (p_cat != String.Empty)      { tmp.SetCategory(p_cat); }
+
+
                 tlp_ItemRows.Controls.Add(tmp, 0, tlp_ItemRows.RowCount);
             }
             else
             {
-                Invoke(new MethodInvoker(() => { AddBlankRow(); }));
+                Invoke(new MethodInvoker(() => { AddRow(p_date, p_descr, p_amt, p_cat ); }));
             }
         }
 
@@ -82,7 +89,18 @@ namespace FamilyBudget
             }
         }
 
+        public List<Row_item> GetRows()
+        {
+            List<Row_item> rwitems = new List<Row_item>();
+            foreach(var i in tlp_ItemRows.Controls)
+            {
+                rwitems.Add(i as Row_item);
+            }
+            return rwitems;
+        }
+
         public bool isExpenseTab { get; set; }
+        public String month { get; set; }
 
         public Month_tab()
         {
@@ -99,7 +117,7 @@ namespace FamilyBudget
 
         private void btn_AddRow_Click(object sender, EventArgs e)
         {
-            AddBlankRow();
+            AddRow(String.Empty, String.Empty, String.Empty, String.Empty);
         }
 
         //Sort functions
