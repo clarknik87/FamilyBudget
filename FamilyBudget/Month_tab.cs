@@ -110,6 +110,11 @@ namespace FamilyBudget
             tlp_ItemRows.AutoScroll = true;
         }
 
+        public void SetupSummarySection()
+        {
+            this.month_summary_table.SetupRows(isExpenseTab, this);
+        }
+
         private void btn_removeRow_Click(object sender, EventArgs e)
         {
             RemoveFinalRow();

@@ -39,9 +39,11 @@ namespace FamilyBudget
                 expense_ctl.Dock = DockStyle.Fill;
                 expense_ctl.isExpenseTab = true;
                 expense_ctl.month = m;
+                expense_ctl.SetupSummarySection();
                 income_ctl.Dock = DockStyle.Fill;
                 income_ctl.isExpenseTab = false;
                 income_ctl.month = m;
+                income_ctl.SetupSummarySection();
 
                 //Add filecontents to month tabs if necessary
                 if (fileContent != null)
