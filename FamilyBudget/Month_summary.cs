@@ -16,7 +16,7 @@ namespace FamilyBudget
         bool isExpense;
         Month_tab parentMonthTab = null;
 
-        Dictionary<String, int> summary_data;
+        Dictionary<String, (Label category, TextBox planned, Label actual, Label diff)> summary_data;
 
         public Month_summary()
         {
@@ -27,7 +27,7 @@ namespace FamilyBudget
         {
             isExpense = isExpenseTab;
             parentMonthTab = p_mt;
-            summary_data = new Dictionary<string, int>();
+            summary_data = new Dictionary<string, (Label category, TextBox planned, Label actual, Label diff)>();
             summary_rows = new TableLayoutPanel();
 
             //setup all of the rows
@@ -80,18 +80,55 @@ namespace FamilyBudget
                 summary_rows.Controls.Add(lb_diff, 3, rw);
 
                 // create the data
-                summary_data.Add(c,0);
+                summary_data.Add(c,(lb_cat, tb_plan, lb_act, lb_diff));
 
                 //increment row counter
                 ++rw;
             }
 
+            UpdateTable();
+
             tlp_toplevel.Controls.Add(summary_rows, 0, 1);
         }
 
-        private void lb_Plan_Click(object sender, EventArgs e)
+        private double DollarToDouble(String amount)
         {
+            if (amount != "")
+            {
+                amount = amount.Substring(1);
+                return double.Parse(amount);
+            }
+            return 0.0;
+        }
 
+        private String DoubleToDollar(double amount)
+        {
+            return "$" + amount.ToString("N2");
+        }
+
+        public void UpdateTable()
+        {
+            if(parentMonthTab != null)
+            {
+                // clear current data
+                foreach(var key in summary_data.Keys.ToList())
+                {
+                    (Label category, TextBox planned, Label actual, Label diff) = summary_data[key];
+                    actual.Text = "$0.00";
+                }
+
+                // recalculate the actual values
+                foreach(Row_item i in parentMonthTab.GetRows())
+                {
+                    if (summary_data.Keys.Contains(i.GetCategory()))
+                    {
+                        (Label category, TextBox planned, Label actual, Label diff) = summary_data[i.GetCategory()];
+                        actual.Text = DoubleToDollar(i.GetAmount() + DollarToDouble(actual.Text));
+                    }
+                }
+
+                // update the difference label in the table
+            }
         }
     }
 }

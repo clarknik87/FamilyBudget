@@ -17,6 +17,7 @@ namespace FamilyBudget
             if (!InvokeRequired)
             {
                 Row_item tmp = new Row_item();
+                tmp.parentMonthTab = this;
                 tmp.Dock = DockStyle.Top;
                 tlp_ItemRows.RowCount += 1;
 
@@ -113,6 +114,11 @@ namespace FamilyBudget
         public void SetupSummarySection()
         {
             this.month_summary_table.SetupRows(isExpenseTab, this);
+        }
+
+        public void UpdateSummarySection()
+        {
+            this.month_summary_table.UpdateTable();
         }
 
         private void btn_removeRow_Click(object sender, EventArgs e)

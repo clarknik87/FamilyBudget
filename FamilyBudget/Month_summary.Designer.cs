@@ -82,7 +82,6 @@ namespace FamilyBudget
             this.lb_Plan.TabIndex = 1;
             this.lb_Plan.Text = "Planned";
             this.lb_Plan.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lb_Plan.Click += new System.EventHandler(this.lb_Plan_Click);
             // 
             // lb_category
             // 

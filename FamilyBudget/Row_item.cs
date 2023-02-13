@@ -18,6 +18,8 @@ namespace FamilyBudget
             InitializeComponent();
         }
 
+        public Month_tab parentMonthTab { get; set; } = null;
+
         public List<String> Categories { get; set; }
 
         public String GetDate()
@@ -221,6 +223,7 @@ namespace FamilyBudget
             MainForm.FileEdited = true;
             ComboBox rwitem = sender as ComboBox;
             SetCategory(rwitem.Text);
+            parentMonthTab.UpdateSummarySection();
         }
 
         private void tb_AmountCell_Leave(object sender, EventArgs e)
@@ -228,6 +231,7 @@ namespace FamilyBudget
             MainForm.FileEdited = true;
             TextBox amount_cell = sender as TextBox;
             SetAmount(amount_cell.Text);
+            parentMonthTab.UpdateSummarySection();
         }
 
         private void tb_DateCell_Leave(object sender, EventArgs e)
@@ -241,7 +245,6 @@ namespace FamilyBudget
         private void tb_DescriptionCell_Leave(object sender, EventArgs e)
         {
             MainForm.FileEdited = true;
-            return;
         }
     }
 }
