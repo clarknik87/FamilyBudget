@@ -24,11 +24,9 @@ namespace FamilyBudget
             File.MenuItems.Add(new MenuItem("&Save", new EventHandler(save_Clicked)));
             File.MenuItems.Add(new MenuItem("&Exit", new EventHandler(exit_Clicked)));
             this.Menu = mainMenu;
-
-            //setupTabs(null);
         }
 
-        private void setupTabs(Dictionary<String, List<String>> fileContent)
+        private void setupTabs(Dictionary<String, List<String>> fileContent, Dictionary<String, List<String>> summaryContent)
         {
             foreach (string m in Global.Months)
             {
@@ -66,8 +64,24 @@ namespace FamilyBudget
                 }
 
                 //Setup Summary Section
-                expense_ctl.SetupSummarySection();
-                income_ctl.SetupSummarySection();
+                Dictionary<String,String> exp_sum = new Dictionary<String,String>();
+                Dictionary<String, String> inc_sum = new Dictionary<String, String>();
+                if(summaryContent != null)
+                {
+                    foreach(String sum_raw in summaryContent[m])
+                    {
+                        if (sum_raw.Split(',')[0] == "expense")
+                        {
+                            exp_sum[sum_raw.Split(',')[2]] = sum_raw.Split(',')[3];
+                        }
+                        else if(sum_raw.Split(',')[0] == "income")
+                        {
+                            inc_sum[sum_raw.Split(',')[2]] = sum_raw.Split(',')[3];
+                        }
+                    }
+                }
+                expense_ctl.SetupSummarySection(exp_sum);
+                income_ctl.SetupSummarySection(inc_sum);
 
                 //Create expense and income tabs
                 System.Windows.Forms.TabPage expense_tab = new System.Windows.Forms.TabPage("Expenses");
@@ -131,9 +145,11 @@ namespace FamilyBudget
 
                     //Read the contents of the file into a stream
                     Dictionary<String, List<String>> fileContent = new Dictionary<string, List<string>>();
+                    Dictionary<String, List<String>> summaryContent = new Dictionary<string, List<string>>();
                     foreach(String month in Global.Months)
                     {
                         fileContent.Add(month, new List<String>());
+                        summaryContent.Add(month, new List<String>());
                     }
 
                     var fileStream = openFileDialog.OpenFile();
@@ -142,12 +158,22 @@ namespace FamilyBudget
                         String tmp;
                         while( (tmp = savefile.ReadLine()) != null)
                         {
-                            String date = tmp.Split(',')[1];
-                            fileContent[Global.Months[int.Parse(date.Substring(0,2))-1]].Add(tmp);
+                            String type = tmp.Split(',')[0];
+                            if (type == "summary")
+                            {
+                                tmp = tmp.Substring(8); //remove summary tag
+                                summaryContent[tmp.Split(',')[1]].Add(tmp);
+                            }
+                            else if (type == "item")
+                            {
+                                tmp = tmp.Substring(5); //remove item tag
+                                String date = tmp.Split(',')[1];
+                                fileContent[Global.Months[int.Parse(date.Substring(0, 2)) - 1]].Add(tmp);
+                            }
                         }
 
                     }
-                    setupTabs(fileContent);
+                    setupTabs(fileContent, summaryContent);
 
                     fileName = Regex.Split(filePath, @"\\").Last();
                     this.Text = fileName;
@@ -181,6 +207,7 @@ namespace FamilyBudget
                             Month_tab expenses = (((mon.Controls[0] as TabControl).TabPages[0]).Controls[0] as Month_tab);
                             foreach (Row_item it in expenses.GetRows())
                             {
+                                savefile.Write("item,");
                                 savefile.Write("expense,");
                                 savefile.Write(it.GetDate() + ",");
                                 savefile.Write(it.GetDescription() + ",");
@@ -188,16 +215,35 @@ namespace FamilyBudget
                                 savefile.Write(it.GetCategory());
                                 savefile.Write("\r\n");
                             }
+                            foreach ((String category, String planned) in expenses.GetSummarySaveData())
+                            {
+                                savefile.Write("summary,");
+                                savefile.Write("expense,");
+                                savefile.Write(mon.Text + ",");
+                                savefile.Write(category + ",");
+                                savefile.Write(planned + ",");
+                                savefile.Write("\r\n");
+                            }
 
                             //save the income tab
                             Month_tab incomes = (((mon.Controls[0] as TabControl).TabPages[1]).Controls[0] as Month_tab);
                             foreach (Row_item it in incomes.GetRows())
                             {
+                                savefile.Write("item,");
                                 savefile.Write("income,");
                                 savefile.Write(it.GetDate() + ",");
                                 savefile.Write(it.GetDescription() + ",");
                                 savefile.Write(it.GetAmount() + ",");
                                 savefile.Write(it.GetCategory());
+                                savefile.Write("\r\n");
+                            }
+                            foreach ((String category, String planned) in incomes.GetSummarySaveData())
+                            {
+                                savefile.Write("summary,");
+                                savefile.Write("income,");
+                                savefile.Write(mon.Text + ",");
+                                savefile.Write(category + ",");
+                                savefile.Write(planned + ",");
                                 savefile.Write("\r\n");
                             }
                         }

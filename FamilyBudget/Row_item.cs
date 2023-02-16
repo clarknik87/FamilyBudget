@@ -158,6 +158,10 @@ namespace FamilyBudget
                 if (Regex.IsMatch(amount_raw, @"\."))
                 {
                     String amount_dollar = Regex.Split(amount_raw, @"\.")[0];
+                    if(amount_dollar.Count() == 0)
+                    {
+                        amount_dollar = "0";
+                    }
                     if (amount_dollar[0] == '$')
                     {
                         amount_dollar = Regex.Split(amount_dollar, @"\$")[1];

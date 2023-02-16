@@ -111,14 +111,19 @@ namespace FamilyBudget
             tlp_ItemRows.AutoScroll = true;
         }
 
-        public void SetupSummarySection()
+        public void SetupSummarySection(Dictionary<String, String> sumdata)
         {
-            this.month_summary_table.SetupRows(isExpenseTab, this);
+            this.month_summary_table.SetupRows(isExpenseTab, this, sumdata);
         }
 
         public void UpdateSummarySection()
         {
             this.month_summary_table.UpdateTable();
+        }
+
+        public List<(String category, String planned)> GetSummarySaveData()
+        {
+            return this.month_summary_table.GetSummarySaveData();
         }
 
         private void btn_removeRow_Click(object sender, EventArgs e)

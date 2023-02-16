@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace FamilyBudget
 {
@@ -23,7 +24,7 @@ namespace FamilyBudget
             InitializeComponent();
         }
 
-        public void SetupRows(bool isExpenseTab, Month_tab p_mt)
+        public void SetupRows(bool isExpenseTab, Month_tab p_mt, Dictionary<String, String> sumdata)
         {
             isExpense = isExpenseTab;
             parentMonthTab = p_mt;
@@ -64,7 +65,15 @@ namespace FamilyBudget
                 // create the planned textbox
                 TextBox tb_plan = new TextBox();
                 tb_plan.Dock = DockStyle.Fill;
-                tb_plan.Text = "$0.00";
+                if (sumdata.Keys.Contains(c))
+                {
+                    tb_plan.Text = sumdata[c];
+                }
+                else
+                {
+                    tb_plan.Text = "$0.00";
+                }
+                tb_plan.Leave += new System.EventHandler(tb_plan_Leave);
                 summary_rows.Controls.Add(tb_plan, 1, rw);
 
                 // created the actual label
@@ -106,6 +115,54 @@ namespace FamilyBudget
             return "$" + amount.ToString("N2");
         }
 
+        static String ValidateAmountText(String amount_raw)
+        {
+            String amount_formatted = "";
+
+            if (Regex.IsMatch(amount_raw, @"^\$?\d+$") || Regex.IsMatch(amount_raw, @"^\$?\d+\.\d+$") || Regex.IsMatch(amount_raw, @"^\$?\.\d+$"))
+            {
+                //Raw text is valid
+                if (Regex.IsMatch(amount_raw, @"\."))
+                {
+                    String amount_dollar = Regex.Split(amount_raw, @"\.")[0];
+                    if (amount_dollar.Count() == 0)
+                    {
+                        amount_dollar = "0";
+                    }
+                    if (amount_dollar[0] == '$')
+                    {
+                        amount_dollar = Regex.Split(amount_dollar, @"\$")[1];
+                    }
+                    String amount_cents = Regex.Split(amount_raw, @"\.")[1];
+
+                    amount_formatted += "$" + amount_dollar + "." + amount_cents;
+                    return amount_formatted;
+                }
+                else if (Regex.IsMatch(amount_raw, @"^\$?\d+$"))
+                {
+                    //Raw text is formatted as either $x or x
+                    String amount_dollar = amount_raw;
+                    if (amount_dollar[0] == '$')
+                    {
+                        amount_dollar = Regex.Split(amount_dollar, @"\$")[1];
+                    }
+
+                    amount_formatted += "$" + amount_dollar + ".00";
+                    return amount_formatted;
+                }
+            }
+
+            //Raw text is invalid
+            amount_formatted = "$00.00";
+            return amount_formatted;
+        }
+
+        private void tb_plan_Leave(object sender, EventArgs e)
+        {
+            TextBox tb = (sender as TextBox);
+            tb.Text = ValidateAmountText(tb.Text);
+        }
+
         public void UpdateTable()
         {
             if(parentMonthTab != null)
@@ -129,6 +186,18 @@ namespace FamilyBudget
 
                 // update the difference label in the table
             }
+        }
+
+        public List<(String category, String planned)> GetSummarySaveData()
+        {
+            UpdateTable();
+            List<(String category, String planned)> data = new List<(String category, String planned)>();
+            foreach(var key in summary_data.Keys.ToList())
+            {
+                (Label category, TextBox planned, Label actual, Label diff) = summary_data[key];
+                data.Add((category.Text, planned.Text));
+            }
+            return data;
         }
     }
 }
