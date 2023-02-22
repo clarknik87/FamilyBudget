@@ -185,6 +185,22 @@ namespace FamilyBudget
                 }
 
                 // update the difference label in the table
+                foreach (var key in summary_data.Keys.ToList())
+                {
+                    (Label category, TextBox planned, Label actual, Label diff) = summary_data[key];
+                    double plan_amt = DollarToDouble(planned.Text);
+                    double act_amt = DollarToDouble(actual.Text);
+                    double diff_amt = plan_amt - act_amt;
+                    diff.Text = DoubleToDollar(diff_amt);
+                    if(diff_amt >= 0.0)
+                    {
+                        diff.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        diff.ForeColor = Color.Red;
+                    }
+                }
             }
         }
 
