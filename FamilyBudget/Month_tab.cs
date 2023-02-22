@@ -119,11 +119,33 @@ namespace FamilyBudget
         public void UpdateSummarySection()
         {
             this.month_summary_table.UpdateTable();
+
+            this.summary_chart.Series[0].Points.Clear();
+            foreach ((String category, double actual) in GetSummaryData())
+            {
+                this.summary_chart.Series[0].Points.AddXY(category, actual);
+            }
+        }
+
+        public void SetupSummaryChart()
+        {
+            this.summary_chart.Series[0].Points.Clear();
+            this.summary_chart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            foreach((String category, double actual) in GetSummaryData())
+            {
+                this.summary_chart.Series[0].Points.AddXY(category, actual);
+            }
+            this.summary_chart.Series[0].ToolTip = "#VALX, $#VALY";
         }
 
         public List<(String category, String planned)> GetSummarySaveData()
         {
             return this.month_summary_table.GetSummarySaveData();
+        }
+
+        public List<(String category, double actual)> GetSummaryData()
+        {
+            return this.month_summary_table.GetSummaryData();
         }
 
         private void btn_removeRow_Click(object sender, EventArgs e)

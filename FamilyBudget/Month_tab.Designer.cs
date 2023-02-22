@@ -29,6 +29,9 @@ namespace FamilyBudget
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tlp_TopLevelRows = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_labelrow = new System.Windows.Forms.TableLayoutPanel();
             this.btn_CategorySort = new System.Windows.Forms.Button();
@@ -45,10 +48,12 @@ namespace FamilyBudget
             this.tlp_ItemRows = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_summaryDivider = new System.Windows.Forms.TableLayoutPanel();
             this.month_summary_table = new FamilyBudget.Month_summary();
+            this.summary_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tlp_TopLevelRows.SuspendLayout();
             this.tlp_labelrow.SuspendLayout();
             this.tlp_ButtonRow.SuspendLayout();
             this.tlp_summaryDivider.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.summary_chart)).BeginInit();
             this.SuspendLayout();
             // 
             // tlp_TopLevelRows
@@ -82,7 +87,7 @@ namespace FamilyBudget
             this.tlp_labelrow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
             this.tlp_labelrow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_labelrow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
-            this.tlp_labelrow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tlp_labelrow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlp_labelrow.Controls.Add(this.btn_CategorySort, 7, 0);
             this.tlp_labelrow.Controls.Add(this.btn_AmountSort, 5, 0);
             this.tlp_labelrow.Controls.Add(this.btn_DescriptionSort, 3, 0);
@@ -105,10 +110,10 @@ namespace FamilyBudget
             this.btn_CategorySort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
             this.btn_CategorySort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_CategorySort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_CategorySort.Location = new System.Drawing.Point(595, 1);
+            this.btn_CategorySort.Location = new System.Drawing.Point(593, 1);
             this.btn_CategorySort.Margin = new System.Windows.Forms.Padding(0);
             this.btn_CategorySort.Name = "btn_CategorySort";
-            this.btn_CategorySort.Size = new System.Drawing.Size(34, 24);
+            this.btn_CategorySort.Size = new System.Drawing.Size(36, 24);
             this.btn_CategorySort.TabIndex = 7;
             this.btn_CategorySort.TabStop = false;
             this.btn_CategorySort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -121,7 +126,7 @@ namespace FamilyBudget
             this.btn_AmountSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
             this.btn_AmountSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_AmountSort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_AmountSort.Location = new System.Drawing.Point(489, 1);
+            this.btn_AmountSort.Location = new System.Drawing.Point(487, 1);
             this.btn_AmountSort.Margin = new System.Windows.Forms.Padding(0);
             this.btn_AmountSort.Name = "btn_AmountSort";
             this.btn_AmountSort.Size = new System.Drawing.Size(20, 24);
@@ -137,7 +142,7 @@ namespace FamilyBudget
             this.btn_DescriptionSort.BackgroundImage = global::FamilyBudget.Properties.Resources.sort_none;
             this.btn_DescriptionSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_DescriptionSort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_DescriptionSort.Location = new System.Drawing.Point(383, 1);
+            this.btn_DescriptionSort.Location = new System.Drawing.Point(381, 1);
             this.btn_DescriptionSort.Margin = new System.Windows.Forms.Padding(0);
             this.btn_DescriptionSort.Name = "btn_DescriptionSort";
             this.btn_DescriptionSort.Size = new System.Drawing.Size(20, 24);
@@ -153,7 +158,7 @@ namespace FamilyBudget
             this.lbl_Category.AutoSize = true;
             this.lbl_Category.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Category.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Category.Location = new System.Drawing.Point(513, 1);
+            this.lbl_Category.Location = new System.Drawing.Point(511, 1);
             this.lbl_Category.Name = "lbl_Category";
             this.lbl_Category.Size = new System.Drawing.Size(78, 24);
             this.lbl_Category.TabIndex = 3;
@@ -165,7 +170,7 @@ namespace FamilyBudget
             this.lbl_Amount.AutoSize = true;
             this.lbl_Amount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Amount.Location = new System.Drawing.Point(407, 1);
+            this.lbl_Amount.Location = new System.Drawing.Point(405, 1);
             this.lbl_Amount.Name = "lbl_Amount";
             this.lbl_Amount.Size = new System.Drawing.Size(78, 24);
             this.lbl_Amount.TabIndex = 2;
@@ -179,7 +184,7 @@ namespace FamilyBudget
             this.lbl_Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Description.Location = new System.Drawing.Point(110, 1);
             this.lbl_Description.Name = "lbl_Description";
-            this.lbl_Description.Size = new System.Drawing.Size(269, 24);
+            this.lbl_Description.Size = new System.Drawing.Size(267, 24);
             this.lbl_Description.TabIndex = 1;
             this.lbl_Description.Text = "Description";
             this.lbl_Description.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -276,6 +281,7 @@ namespace FamilyBudget
             this.tlp_summaryDivider.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp_summaryDivider.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp_summaryDivider.Controls.Add(this.month_summary_table, 1, 0);
+            this.tlp_summaryDivider.Controls.Add(this.summary_chart, 0, 0);
             this.tlp_summaryDivider.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_summaryDivider.Location = new System.Drawing.Point(5, 5);
             this.tlp_summaryDivider.Name = "tlp_summaryDivider";
@@ -292,6 +298,25 @@ namespace FamilyBudget
             this.month_summary_table.Size = new System.Drawing.Size(308, 148);
             this.month_summary_table.TabIndex = 0;
             // 
+            // summary_chart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.summary_chart.ChartAreas.Add(chartArea1);
+            this.summary_chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.Name = "Legend1";
+            this.summary_chart.Legends.Add(legend1);
+            this.summary_chart.Location = new System.Drawing.Point(4, 4);
+            this.summary_chart.Name = "summary_chart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.CustomProperties = "PieLabelStyle=Disabled";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.summary_chart.Series.Add(series1);
+            this.summary_chart.Size = new System.Drawing.Size(307, 148);
+            this.summary_chart.TabIndex = 1;
+            this.summary_chart.Text = "chart1";
+            // 
             // Month_tab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -304,6 +329,7 @@ namespace FamilyBudget
             this.tlp_labelrow.PerformLayout();
             this.tlp_ButtonRow.ResumeLayout(false);
             this.tlp_summaryDivider.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.summary_chart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -326,5 +352,6 @@ namespace FamilyBudget
         private System.Windows.Forms.Button btn_DateSort;
         private System.Windows.Forms.TableLayoutPanel tlp_summaryDivider;
         private Month_summary month_summary_table;
+        private System.Windows.Forms.DataVisualization.Charting.Chart summary_chart;
     }
 }

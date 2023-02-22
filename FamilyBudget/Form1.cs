@@ -82,6 +82,8 @@ namespace FamilyBudget
                 }
                 expense_ctl.SetupSummarySection(exp_sum);
                 income_ctl.SetupSummarySection(inc_sum);
+                expense_ctl.SetupSummaryChart();
+                income_ctl.SetupSummaryChart();
 
                 //Create expense and income tabs
                 System.Windows.Forms.TabPage expense_tab = new System.Windows.Forms.TabPage("Expenses");

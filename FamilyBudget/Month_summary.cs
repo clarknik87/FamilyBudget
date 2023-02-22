@@ -215,5 +215,16 @@ namespace FamilyBudget
             }
             return data;
         }
+
+        public List<(String category, double actual)> GetSummaryData()
+        {
+            List<(String category, double actual)> data = new List<(String category, double actual)>();
+            foreach (var key in summary_data.Keys.ToList())
+            {
+                (Label category, TextBox planned, Label actual, Label diff) = summary_data[key];
+                data.Add((category.Text, DollarToDouble(actual.Text)));
+            }
+            return data;
+        }
     }
 }
