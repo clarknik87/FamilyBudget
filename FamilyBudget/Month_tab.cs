@@ -114,28 +114,47 @@ namespace FamilyBudget
         public void SetupSummarySection(Dictionary<String, String> sumdata)
         {
             this.month_summary_table.SetupRows(isExpenseTab, this, sumdata);
+            if (isExpenseTab)
+            {
+                this.lb_total.ForeColor = Color.Navy;
+            }
+            else
+            {
+                this.lb_total.ForeColor = Color.Green;
+            }
+            this.lb_total.Text = "$";
         }
 
         public void UpdateSummarySection()
         {
+            // Update summary table
             this.month_summary_table.UpdateTable();
 
+            // Update summary chart
+            double total = 0.0;
             this.summary_chart.Series[0].Points.Clear();
             foreach ((String category, double actual) in GetSummaryData())
             {
                 this.summary_chart.Series[0].Points.AddXY(category, actual);
+                total += actual;
             }
+
+            // Update total amount
+            lb_total.Text = "$" + total.ToString("N2");
         }
 
         public void SetupSummaryChart()
         {
+            double total = 0.0;
             this.summary_chart.Series[0].Points.Clear();
             this.summary_chart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
             foreach((String category, double actual) in GetSummaryData())
             {
                 this.summary_chart.Series[0].Points.AddXY(category, actual);
+                total += actual;
             }
             this.summary_chart.Series[0].ToolTip = "#VALX, $#VALY";
+            lb_total.Text = "$" + total.ToString("N2");
         }
 
         public List<(String category, String planned)> GetSummarySaveData()
