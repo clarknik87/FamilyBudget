@@ -73,6 +73,12 @@
     <Compile Include="Row_item.Designer.cs">
       <DependentUpon>Row_item.cs</DependentUpon>
     </Compile>
+    <Compile Include="TopSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TopSummary.Designer.cs">
+      <DependentUpon>TopSummary.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Row_item.resx">
       <DependentUpon>Row_item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopSummary.resx">
+      <DependentUpon>TopSummary.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

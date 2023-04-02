@@ -26,6 +26,11 @@ namespace FamilyBudget
             this.Menu = mainMenu;
         }
 
+        private void setupSummaryTable()
+        {
+            uc_Summary.SetupSummaryTable();
+        }
+
         private void setupTabs(Dictionary<String, List<String>> fileContent, Dictionary<String, List<String>> summaryContent)
         {
             foreach (string m in Global.Months)
@@ -106,6 +111,8 @@ namespace FamilyBudget
 
                 tc_TabController.TabPages.Add(tp);
             }
+
+            setupSummaryTable();
         }
 
         private static String filePath = String.Empty;

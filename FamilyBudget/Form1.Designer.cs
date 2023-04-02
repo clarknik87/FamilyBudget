@@ -30,7 +30,9 @@
         {
             this.tc_TabController = new System.Windows.Forms.TabControl();
             this.Summary = new System.Windows.Forms.TabPage();
+            this.uc_Summary = new FamilyBudget.TopSummary();
             this.tc_TabController.SuspendLayout();
+            this.Summary.SuspendLayout();
             this.SuspendLayout();
             // 
             // tc_TabController
@@ -46,6 +48,7 @@
             // 
             // Summary
             // 
+            this.Summary.Controls.Add(this.uc_Summary);
             this.Summary.Location = new System.Drawing.Point(4, 4);
             this.Summary.Name = "Summary";
             this.Summary.Padding = new System.Windows.Forms.Padding(3);
@@ -53,6 +56,14 @@
             this.Summary.TabIndex = 0;
             this.Summary.Text = "Summary";
             this.Summary.UseVisualStyleBackColor = true;
+            // 
+            // uc_Summary
+            // 
+            this.uc_Summary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uc_Summary.Location = new System.Drawing.Point(3, 3);
+            this.uc_Summary.Name = "uc_Summary";
+            this.uc_Summary.Size = new System.Drawing.Size(786, 418);
+            this.uc_Summary.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -64,6 +75,7 @@
             this.Text = "Family Budget";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.tc_TabController.ResumeLayout(false);
+            this.Summary.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -72,6 +84,7 @@
 
         private System.Windows.Forms.TabControl tc_TabController;
         private System.Windows.Forms.TabPage Summary;
+        private TopSummary uc_Summary;
     }
 }
 
